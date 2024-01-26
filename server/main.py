@@ -17,14 +17,62 @@ def calculate_happiness_score(frame):
     # use cv2 to detect face and smile, using haar cascade
 
     # 0.0: sad
-    # 0.5: neutral
     # 1.0: happy
 
     # pretrained models need to be already on the server
     face_cascadeClassifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     smile_cascadeClassifier = cv2.CascadeClassifier('haarcascade_smile.xml')
 
-    return np.random.rand()  
+    # convert frame to grayscale
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # detect faces
+    faces = face_cascadeClassifier.detectMultiScale(gray, 1.3, 5)
+
+    # for each face, detect smile
+    for (x, y, w, h) in faces:
+        # draw rectangle around face
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+
+        # detect smile
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_color = frame[y:y+h, x:x+w]
+
+        smiles = smile_cascadeClassifier.detectMultiScale(roi_gray, 1.8, 20)
+
+        # if smile detected, return 1.0
+        if len(smiles) > 0:
+            return 1.0
+    
+    # if no smile detected, return 0.0
+    return 0.0
+
+# use a neural network to detect happiness and get a score from 0 to 1
+def calculate_happiness_score2(frame):
+    # detect face, use neural network to detect happiness
+    face_cascadeClassifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+    # convert frame to grayscale
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # detect faces
+    faces = face_cascadeClassifier.detectMultiScale(gray, 1.3, 5)
+
+    # for each face, detect smile
+    for (x, y, w, h) in faces:
+        # draw rectangle around face
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+
+        # detect smile
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_color = frame[y:y+h, x:x+w]
+
+        # TODO: use neural network to detect happiness
+
+        # if smile detected, return 1.0
+        if len(smiles) > 0:
+            return 1.0
+    
 
 def handle_client(connection):
     try:
