@@ -1,39 +1,65 @@
 <template>
   <div class="home">
-    <img class="logo-home" alt="logo" src="../assets/logo.png">
-    <router-link to="/game">
-      <button class="btn-8bit">START</button>
-    </router-link>
+    <div class="brand-container">
+      <img class="logo-home" alt="logo" src="../assets/logo.png">
+      <h2 class="text">Try not to laugh</h2>
+    </div>
+    <div class="text-container">
+    </div>
+    <div class="cta-container">
+      <router-link to="/game">
+        <button class="btn-8bit">Start the battle</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .home {
-  width: 100%;
   height: 100vh;
+  background-image: url('../assets/home-bg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-color: #9437B7;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-image: url('../assets/home-bg.png'); /* Adding background image */
-  background-size: cover, contain; /* Cover the entire background */
-  background-position: center; /* Centers the background image */
 }
 
-.logo-home{
-  width: 40vh;
-  height: auto;
-  margin-bottom: 20px;
+.brand-container {
+  height: 35%;
+  width: 100%;
+  padding-top: 60px;
+}
+
+.logo-home {
+  width: 80%;
+  display: inline-block;
+  object-fit: contain
+}
+
+.text {
+  font-family: 'VT323', monospace;
+  color: #fff;
+  font-size: 30px
 }
 
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+.cta-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-bottom: 60px;
+}
+
 .btn-8bit {
-  font-family: 'VT323', monospace; /* VT323 font applied */
-  font-size: 30px; /* Adjust font size as needed */
+  font-family: 'VT323', monospace;
+  font-size: 30px;
   color: #fff;
-  background-color: #32CD32; /* Green background */
-  border: 3px solid #228B22; /* Darker green border */
+  background-color: #32CD32;
+  border: 3px solid #228B22;
   border-radius: 5px;
   padding: 10px 50px;
   text-align: center;
@@ -41,14 +67,15 @@
   display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
-  -webkit-transition-duration: 0.2s; /* Safari */
+  -webkit-transition-duration: 0.2s;
   transition-duration: 0.2s;
   text-shadow: 0 0 3px #000;
-  box-shadow: 0 9px #006400; /* Deep green shadow for depth */
+  box-shadow: 0 9px #006400;
 }
 
 .btn-8bit:hover {
-  background-color: #2E8B57; /* Slightly different green on hover */
+  background-color: #2E8B57;
+  /* Slightly different green on hover */
   color: white;
   box-shadow: 0 5px #006400;
   transform: translateY(4px);
