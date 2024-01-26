@@ -29,38 +29,44 @@ export default {
 <style>
 .game {
   position: relative;
-  width: 30%;
-  height: 100vh;
+  width: 70vh; /* Width relative to the viewport height */
+  height: 100vh; /* Full viewport height */
   overflow: hidden;
-  display: flex; /* Use flex layout */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .webcam-container {
-  display: flex; /* Enable flex layout */
-  flex-direction: column; /* Stack children vertically */
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 }
 
 #webcam1, #webcam2 {
-  width: 100%; /* Set width to 100% of parent */
-  height: 50%; /* Each webcam takes half of the container height */
+  width: 100%;
+  height: 50%;
   object-fit: cover;
 }
 
-/* Additional styles */
-body, html {
+/* Ensures the body takes full height of the viewport */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  display: flex; /* Enables flexbox layout */
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
   .game {
-    width: 100%;
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  body, html {
+    display: block;
   }
 }
 </style>
