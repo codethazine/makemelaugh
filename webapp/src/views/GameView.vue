@@ -1,7 +1,6 @@
 <template>
   <div class="game">
     <div class="webcam-container">
-      <!-- Assign unique IDs and refs to each webcam element -->
       <video id="webcam1" ref="webcam1" autoplay playsinline></video>
       <video id="webcam2" ref="webcam2" autoplay playsinline></video>
     </div>
@@ -17,7 +16,6 @@ export default {
     async setupWebcam() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        // Assign the stream to both video elements
         this.$refs.webcam1.srcObject = stream;
         this.$refs.webcam2.srcObject = stream;
       } catch (error) {
@@ -34,36 +32,22 @@ export default {
   width: 30%;
   height: 100vh;
   overflow: hidden;
+  display: flex; /* Use flex layout */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 .webcam-container {
- position: relative;
- width: 100%;
- height: 100%;
+  display: flex; /* Enable flex layout */
+  flex-direction: column; /* Stack children vertically */
+  width: 100%;
+  height: 100%;
 }
 
 #webcam1, #webcam2 {
- position: absolute;
- width: 100%;
- height: 50%;
- object-fit: cover;
- left: 0;
-}
-
-#webcam1 {
- top: 0;
-}
-
-#webcam2 {
- top: 50%;
-}
-
-.divider {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: white;
-  top: 50%; /* Center the divider */
+  width: 100%; /* Set width to 100% of parent */
+  height: 50%; /* Each webcam takes half of the container height */
+  object-fit: cover;
 }
 
 /* Additional styles */
