@@ -1,31 +1,102 @@
 <template>
   <div class="game">
     <div class="webcam-container">
-      <video id="webcam1" ref="webcam1" autoplay playsinline></video>
-      <video id="webcam2" ref="webcam2" autoplay playsinline></video>
+      <video id="localVideo" ref="localVideo" autoplay playsinline></video>
+      <video id="remoteVideo" ref="remoteVideo" autoplay playsinline></video>
     </div>
   </div>
 </template>
 
 <script>
+import io from 'socket.io-client';
+const socket = io('http://localhost:3000');
+
 export default {
+  data() {
+    return {
+      localStream: null,
+      peerConnection: null,
+      roomId: 'unique-room-id', // This should be dynamically generated or passed
+    };
+  },
   mounted() {
     this.setupWebcam();
+    this.joinRoom();
   },
   methods: {
     async setupWebcam() {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        this.$refs.webcam1.srcObject = stream;
-        this.$refs.webcam2.srcObject = stream;
+        this.localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        this.$refs.localVideo.srcObject = this.localStream;
       } catch (error) {
         console.error('Error accessing the webcam:', error);
       }
     },
+    joinRoom() {
+      socket.emit('joinRoom', { roomId: this.roomId });
+      this.setupSocketListeners();
+    },
+    setupSocketListeners() {
+      socket.on('signal', data => {
+        if (data.type === 'offer') {
+          this.handleOffer(data.offer);
+        } else if (data.type === 'answer') {
+          this.handleAnswer(data.answer);
+        } else if (data.type === 'candidate') {
+          this.handleCandidate(data.candidate);
+        }
+      });
+    },
+    async createOffer() {
+      this.peerConnection = new RTCPeerConnection();
+      this.localStream.getTracks().forEach(track => {
+        this.peerConnection.addTrack(track, this.localStream);
+      });
+
+      this.peerConnection.onicecandidate = event => {
+        if (event.candidate) {
+          socket.emit('signal', { roomId: this.roomId, type: 'candidate', candidate: event.candidate });
+        }
+      };
+
+      this.peerConnection.ontrack = event => {
+        this.$refs.remoteVideo.srcObject = event.streams[0];
+      };
+
+      const offer = await this.peerConnection.createOffer();
+      await this.peerConnection.setLocalDescription(offer);
+      socket.emit('signal', { roomId: this.roomId, type: 'offer', offer });
+    },
+    async handleOffer(offer) {
+      this.peerConnection = new RTCPeerConnection();
+      this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+      this.localStream.getTracks().forEach(track => {
+        this.peerConnection.addTrack(track, this.localStream);
+      });
+
+      this.peerConnection.onicecandidate = event => {
+        if (event.candidate) {
+          socket.emit('signal', { roomId: this.roomId, type: 'candidate', candidate: event.candidate });
+        }
+      };
+
+      this.peerConnection.ontrack = event => {
+        this.$refs.remoteVideo.srcObject = event.streams[0];
+      };
+
+      const answer = await this.peerConnection.createAnswer();
+      await this.peerConnection.setLocalDescription(answer);
+      socket.emit('signal', { roomId: this.roomId, type: 'answer', answer });
+    },
+    async handleAnswer(answer) {
+      await this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+    },
+    handleCandidate(candidate) {
+      this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+    },
   },
 };
 </script>
-
 <style>
 .game {
   position: relative;
