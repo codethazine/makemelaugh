@@ -84,7 +84,7 @@ export default {
 
 .devices {
   border-radius: 12px;
-  background-color: #121a24;
+  background-color: #9437B7;
   opacity: 0.85;
   padding: 14px 10px 15px;
 }

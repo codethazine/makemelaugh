@@ -67,9 +67,8 @@ export default {
   color: #2c3e50;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   overflow-x: hidden;
-  background-color: #121a24;
+  background-color: #9437B7;
 }
 a {
   text-decoration: none;
@@ -79,5 +78,16 @@ a {
 }
 body {
   margin: 0;
+}
+html {
+  height: 100vh;
+  background-color: #9437B7;
+}
+
+/* if not on mobile */
+@media screen and (min-width: 800px) {
+  #app {
+    height: 100vh;
+  }
 }
 </style>

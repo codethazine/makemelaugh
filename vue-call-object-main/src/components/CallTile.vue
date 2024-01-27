@@ -217,7 +217,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap");
 main {
   font-family: "Ropa Sans", sans-serif;
-  background-color: #121a24;
+  background-color: #9437B7;
   height: 100%;
   position: relative;
 }
@@ -246,7 +246,7 @@ main {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  background-color: #121a24;
+  background-color: #9437B7;
   height: inherit;
 }
 p {
@@ -260,7 +260,7 @@ p {
 }
 .error-button {
   color: #fff;
-  background-color: #121a24;
+  background-color: #9437B7;
   border: none;
   font-size: 12px;
   border: 1px solid #2b3f56;

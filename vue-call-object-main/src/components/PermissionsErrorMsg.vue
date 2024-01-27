@@ -52,7 +52,7 @@ h2 {
 }
 button {
   color: #fff;
-  background-color: #121a24;
+  background-color: #9437B7;
   border: none;
   font-size: 12px;
   border: 1px solid #2b3f56;

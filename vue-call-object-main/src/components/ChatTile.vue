@@ -144,7 +144,7 @@ form {
 }
 
 .chat-message {
-  color: #121a24;
+  color: #9437B7;
   text-align: left;
   font-size: 14px;
   line-height: 18px;
