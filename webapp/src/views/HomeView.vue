@@ -50,7 +50,7 @@
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
   margin-bottom: 60px;
 }
 
