@@ -6,17 +6,13 @@
 
 import cv2
 import numpy as np
-# import tensorflow as tf
 import websockets
 import asyncio
+from fer import FER
 
-# from tensorflow.keras.models import load_model
-# from tensorflow.keras.preprocessing import image
-# from tensorflow.keras.preprocessing.image import img_to_array
-# from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
-
-# load emotion labels
-emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
+# Emotion detector from fer
+emotion_detector = FER() 
+ 
 
 def calculate_happiness_score_cascade(frame):
     # TODO: Calculate happiness score for frame
@@ -55,7 +51,7 @@ def calculate_happiness_score_cascade(frame):
 
 
 
-def calculate_happiness_score_neural(frame):
+def calculate_happiness_score_fer(frame):
     # Calculate happiness score for frame using neural network
     # use cv2 to detect face, using haar cascade
 
@@ -72,10 +68,19 @@ def calculate_happiness_score_neural(frame):
     # detect faces
     faces = face_cascadeClassifier.detectMultiScale(gray, 1.3, 5)
 
-    # TODO: use neural network to detect happiness
+    max_happiness_score = 0.0
 
-    return 0.5
-    
+    # iterate over faces, resize and preprocess them, then predict happiness score
+    for (x, y, w, h) in faces:
+        # use only the face region of interest
+        roi_gray = gray[y:y+h, x:x+w]
+        result = emotion_detector.detect_emotions(roi_gray)
+        emotions = result[0]["emotions"]
+        happiness_score = emotions["happy"]
+        if happiness_score > max_happiness_score:
+            max_happiness_score = happiness_score
+
+    return max_happiness_score
 
 async def handle_client(websocket, path):
     print("New client connected")
@@ -91,7 +96,7 @@ async def handle_client(websocket, path):
 
             # calculate happiness score
             # happiness_score = calculate_happiness_score_cascade(frame)
-            happiness_score = calculate_happiness_score_neural(frame)
+            happiness_score = calculate_happiness_score_fer(frame)
             print("Happiness score: ", happiness_score)
 
             # send happiness score to client
@@ -104,7 +109,7 @@ async def handle_client(websocket, path):
 async def main():
     print("Starting server")
     # WebSocket server
-    server = await websockets.serve(handle_client, "localhost", 8765)
+    server = await websockets.serve(handle_client, "127.0.0.1", 8765)
     print("Server started")
 
     await server.wait_closed()
