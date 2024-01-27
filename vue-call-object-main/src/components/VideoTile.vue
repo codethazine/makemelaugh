@@ -16,18 +16,21 @@
     <template v-if="participant.local">
       
     </template>
+    <HealthBarVue/>
   </div>
 </template>
 
 <script>
 import CallControls from "./CallControls.vue";
 import NoVideoTile from "./NoVideoTile.vue";
+import HealthBarVue from './HealthBar.vue';
 
 export default {
   name: "VideoTile",
   components: {
     CallControls,
     NoVideoTile,
+    HealthBarVue
   },
   props: [
     "participant",
