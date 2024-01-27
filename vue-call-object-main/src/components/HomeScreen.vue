@@ -40,8 +40,8 @@ export default {
   },
   data() {
     return {
-      name: "",
-      url: "",
+      name: "X",
+      url: "https://makemelaugh.daily.co/3AiL9WfT50wrRPEwZOJW",
     };
   },
   methods: {
