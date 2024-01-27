@@ -1,11 +1,15 @@
 <template>
-  <main>
-    <div class="wrapper">
-      <h1>Call object Vue demo</h1>
-      <p>Demo a custom call interface built using Daily call object for Vue</p>
-
+  <main class="home">
+    <div class="brand-container">
+      <img class="logo-home" alt="logo" src="../assets/logo.png">
+      <h2 class="text">Try not to laugh</h2>
+    </div>
+    <div class="text-container">
+    </div>
+    <div class="cta-container">
       <form class="join-form" @submit="joinWithName">
         <div class="name-container">
+          <!--
           <label for="name">Your name</label>
           <input id="name" v-model="name" type="text" required />
           <label for="name">Daily URL</label>
@@ -16,19 +20,13 @@
             placeholder="https://your-daily-domain.daily.co/room-name"
             required
           />
+          -->
         </div>
-        <div class="submit-container">
-          <button type="submit">Start demo</button>
-        </div>
+        <button class="btn-8bit">Start the battle</button>
       </form>
-
-      <p class="subtext">
-        If prompted, select "Allow" to use your camera and mic for this call
-      </p>
     </div>
   </main>
 </template>
-
 <script>
 export default {
   name: "HomeScreen",
@@ -54,59 +52,72 @@ export default {
 </script>
 
 <style scoped>
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  background-color: #fff;
-}
-.wrapper {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 16px;
-}
-.wrapper p {
-  margin: 8px 0;
-}
-.join-form {
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.home {
+  height: 100vh;
+  background-image: url('../assets/home-bg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-color: #9437B7;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  margin: auto;
 }
 
-.join-form label {
-  font-size: 12px;
-  color: #6b7785;
-  text-align: left;
-  margin: 8px 0 4px;
+.brand-container {
+  height: 35%;
+  width: 100%;
+  padding-top: 60px;
 }
-.join-form input {
-  padding: 8px;
-  border: 1px solid #c8d1dc;
-  border-radius: 12px;
+
+.logo-home {
+  width: 80%;
+  max-width: 40vh;
+  display: inline-block;
+  object-fit: contain
 }
-.join-form div {
+
+.text {
+  font-family: 'VT323', monospace;
+  color: white;
+  font-size: 30px;
+  /* Add shadow to text */
+  text-shadow: 2px 2px 0 #000;
+}
+
+.cta-container {
+  flex-grow: 1;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 60px;
 }
-.join-form .submit-container button {
-  padding: 7px 16px 9px;
-  font-size: 12px;
-  font-weight: bold;
-  border: none;
-  border-radius: 12px;
-  margin-top: 16px;
-  margin-bottom: 12px;
-  background-color: #1bebb9;
+
+.btn-8bit {
+  font-family: 'VT323', monospace;
+  font-size: 30px;
+  color: #fff;
+  background-color: #32CD32;
+  border: 3px solid #228B22;
+  border-radius: 5px;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
   cursor: pointer;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  text-shadow: 0 0 3px #000;
+  box-shadow: 0 9px #006400;
 }
-.join-form .name-container {
-  flex-direction: column;
-}
-.subtext {
-  font-size: 12px;
-  color: #6b7785;
+
+.btn-8bit:hover {
+  background-color: #2E8B57;
+  /* Slightly different green on hover */
+  color: white;
+  box-shadow: 0 5px #006400;
+  transform: translateY(4px);
 }
 </style>
