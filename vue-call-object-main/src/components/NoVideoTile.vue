@@ -14,7 +14,7 @@ export default {
 <style>
 .no-video {
   background-color: #2b3f56;
-  border-radius: 16px;
+  border-radius: 0;
   aspect-ratio: 16/9;
   color: #fff;
   position: relative;

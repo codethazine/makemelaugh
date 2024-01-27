@@ -83,7 +83,7 @@ export default {
 }
 
 .devices {
-  border-radius: 12px;
+  border-radius: 0;
   background-color: #9437B7;
   opacity: 0.85;
   padding: 14px 10px 15px;
@@ -102,7 +102,7 @@ button.leave {
   background-color: white;
   opacity: 0.85;
   padding: 14px 16px 15px;
-  border-radius: 12px;
+  border-radius: 0;
 }
 button:disabled {
   cursor: not-allowed;

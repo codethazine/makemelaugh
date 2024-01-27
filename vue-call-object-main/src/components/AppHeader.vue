@@ -80,7 +80,7 @@ header > div {
 }
 .button-link {
   border: 1px solid #c8d1dc;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 7px 16px;
 }
 @media screen and (max-width: 700px) {

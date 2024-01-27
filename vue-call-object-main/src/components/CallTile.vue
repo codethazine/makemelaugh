@@ -264,7 +264,7 @@ p {
   border: none;
   font-size: 12px;
   border: 1px solid #2b3f56;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 8px 12px;
   cursor: pointer;
 }
