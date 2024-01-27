@@ -28,6 +28,9 @@ export default {
                 this.trailWidth = 0;
             }, 500);
         },
+        handleLeftArrowKey() {
+            this.loseLife(20);
+        },
     },
     watch: {
         showTrail(newValue) {
@@ -35,15 +38,16 @@ export default {
                 this.trailWidth = Math.min((100 - this.healthPercentage) * 2, 100);
             }
         },
+
     },
+    mounted() {
+        document.addEventListener('keydown', this.handleKeyDown);
+    }
 }
 </script>
 
 <template>
-    <div class="lose-background" style="display: none;">
-        <img src="" alt="">
-    </div>
-    <div class="health-bar-container">
+    <div class="health-bar-container" @click="loseLife(10)" @keyup.enter="loseLife(20)">
         <div class="health-bar">
             <div class="health-remaining" :style="{ width: healthPercentage + '%' }"></div>
         </div>
