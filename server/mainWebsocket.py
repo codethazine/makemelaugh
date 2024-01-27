@@ -104,7 +104,7 @@ async def handle_client(websocket, path):
 async def main():
     print("Starting server")
     # WebSocket server
-    server = await websockets.serve(handle_client, "localhost", 8765)
+    server = await websockets.serve(handle_client, "127.0.0.1", 8765)
     print("Server started")
 
     await server.wait_closed()
