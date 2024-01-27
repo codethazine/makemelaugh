@@ -43,8 +43,6 @@
             </div>
           </div>
         </template>
-
-        <chat-tile :send-message="sendMessage" :messages="messages" />
       </div>
     </template>
   </main>
