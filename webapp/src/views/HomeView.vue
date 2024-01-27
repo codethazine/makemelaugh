@@ -63,7 +63,7 @@
   color: #fff;
   background-color: #32CD32;
   border: 3px solid #228B22;
-  border-radius: 5px;
+  border-radius: 0;
   padding: 10px 50px;
   text-align: center;
   text-decoration: none;

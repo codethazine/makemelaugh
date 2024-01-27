@@ -42,6 +42,6 @@ export default {
 }
 video {
   width: 100%;
-  border-radius: 16px;
+  border-radius: 0;
 }
 </style>

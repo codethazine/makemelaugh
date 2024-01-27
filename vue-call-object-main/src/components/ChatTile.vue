@@ -104,7 +104,7 @@ button.chat {
   background-color: #fff;
   border: none;
   cursor: pointer;
-  border-radius: 16px 0 0 16px;
+  border-radius: 0;
   padding: 16px 14px 13px 18px;
 }
 .messages {
