@@ -2,21 +2,38 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 
-// Initialize express app
 const app = express();
-
-// Create HTTP server and integrate with Socket.IO
 const server = http.createServer(app);
-const io = socketIO(server);
+const io = socketIO(server, {
+    cors: {
+      origin: "*", // Allow all origins or specify the ones you want to allow
+      methods: ["GET", "POST"], // Allow specific HTTP methods
+      allowedHeaders: ["my-custom-header"], // Allow specific headers
+      credentials: true // Allow credentials
+    }
+});
 
-// Handle socket connection
+// Store room data
+let roomCount = 0;
+const roomParticipants = {};
+
 io.on('connection', socket => {
   console.log('User connected:', socket.id);
 
-  // Join specific room
-  socket.on('joinRoom', ({ roomId }) => {
-    socket.join(roomId);
-    console.log(`User ${socket.id} joined room: ${roomId}`);
+  socket.on('joinNextAvailableRoom', () => {
+    let roomId = roomCount.toString();
+    if (!roomParticipants[roomId] || roomParticipants[roomId].length < 2) {
+      roomParticipants[roomId] = roomParticipants[roomId] || [];
+      roomParticipants[roomId].push(socket.id);
+      socket.join(roomId);
+      console.log(`User ${socket.id} joined room: ${roomId}`);
+    } else {
+      roomId = (++roomCount).toString();
+      roomParticipants[roomId] = [socket.id];
+      socket.join(roomId);
+      console.log(`User ${socket.id} joined new room: ${roomId}`);
+    }
+    socket.emit('joinedRoom', roomId);
   });
 
   // Relay signaling data between users in the same room
@@ -24,16 +41,18 @@ io.on('connection', socket => {
     socket.to(data.roomId).emit('signal', data);
   });
 
-  // Handle disconnection
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
+    // Remove the user from the room
+    for (const roomId in roomParticipants) {
+      const index = roomParticipants[roomId].indexOf(socket.id);
+      if (index !== -1) {
+        roomParticipants[roomId].splice(index, 1);
+        break;
+      }
+    }
   });
 });
 
-// Set the port the server will listen on
 const PORT = process.env.PORT || 3000;
-
-// Start the server
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

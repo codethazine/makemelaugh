@@ -9,7 +9,7 @@
 
 <script>
 import io from 'socket.io-client';
-const socket = io('http://localhost:3000');
+const socket = io('http://172.20.10.3:3000');
 
 export default {
   data() {
@@ -21,7 +21,7 @@ export default {
   },
   mounted() {
     this.setupWebcam();
-    this.joinRoom();
+    this.joinNextAvailableRoom();
   },
   methods: {
     async setupWebcam() {
@@ -32,11 +32,15 @@ export default {
         console.error('Error accessing the webcam:', error);
       }
     },
-    joinRoom() {
-      socket.emit('joinRoom', { roomId: this.roomId });
+    joinNextAvailableRoom() {
+      socket.emit('joinNextAvailableRoom');
       this.setupSocketListeners();
     },
     setupSocketListeners() {
+      socket.on('joinedRoom', roomId => {
+        this.roomId = roomId;
+        this.updateUrlWithRoomId(roomId);
+      });
       socket.on('signal', data => {
         if (data.type === 'offer') {
           this.handleOffer(data.offer);
@@ -46,6 +50,12 @@ export default {
           this.handleCandidate(data.candidate);
         }
       });
+    },
+    updateUrlWithRoomId(roomId) {
+      if (history.pushState) {
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?roomId=' + roomId;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+      }
     },
     async createOffer() {
       this.peerConnection = new RTCPeerConnection();
