@@ -15,8 +15,11 @@ import asyncio
 # from tensorflow.keras.preprocessing.image import img_to_array
 # from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
+# Load pre-trained model
+# model = tf.keras.models.load_model('your_pretrained_model.h5')
+
 # load emotion labels
-emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
+# emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
 def calculate_happiness_score_cascade(frame):
     # TODO: Calculate happiness score for frame
@@ -72,8 +75,31 @@ def calculate_happiness_score_neural(frame):
     # detect faces
     faces = face_cascadeClassifier.detectMultiScale(gray, 1.3, 5)
 
-    # TODO: use neural network to detect happiness
+    # iterate over faces, resize and preprocess them, then predict happiness score
+    for (x, y, w, h) in faces:
+        # draw region of interest around face
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
+        # detect smile
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_color = frame[y:y+h, x:x+w]
+
+        # resize region of interest to match model input size
+        resized_roi_gray = cv2.resize(roi_gray, (224, 224))
+
+        # preprocess region of interest for model input
+        # img_array = image.img_to_array(resized_roi_gray)
+        # img_array = np.expand_dims(img_array, axis=0)
+        # img_array /= 255.0  # Normalize pixel values to [0, 1]
+        
+        # TODO: use neural network to detect happiness
+        # Predict happiness score using the model
+        # prediction = model.predict(img_array)
+
+        # # Assume the model outputs a single value between 0 and 1
+        # happiness_score = prediction[0][0]
+
+        # return happiness_score
     return 0.5
     
 
@@ -91,7 +117,7 @@ async def handle_client(websocket, path):
 
             # calculate happiness score
             # happiness_score = calculate_happiness_score_cascade(frame)
-            happiness_score = calculate_happiness_score_neural(frame)
+            happiness_score = calculate_happiness_score_cascade(frame)
             print("Happiness score: ", happiness_score)
 
             # send happiness score to client
