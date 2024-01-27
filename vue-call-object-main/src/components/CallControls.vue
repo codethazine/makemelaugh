@@ -1,5 +1,7 @@
 <template>
+  <!--
   <div class="controls">
+    
     <div class="devices">
       <button @click="handleAudioClick">
         <template v-if="participant.audio">
@@ -25,11 +27,11 @@
         </button>
       </template>
     </div>
-
-    <button class="leave" @click="leaveCall">
-      <img class="icon" :src="leave" alt="" />
-    </button>
   </div>
+  -->
+  <button class="leave" @click="leaveCall">
+    <img class="icon" alt="" src="../assets/logo.png" />
+  </button>
 </template>
 
 <script>
@@ -93,11 +95,11 @@ button {
 }
 button:not(.leave) {
   margin: 0 4px;
-  width: 36px;
-  height: 26px;
+  width: 72px;
+  height: 52px;
 }
 button.leave {
-  background-color: #f63135;
+  background-color: white;
   opacity: 0.85;
   padding: 14px 16px 15px;
   border-radius: 12px;
@@ -107,6 +109,6 @@ button:disabled {
   opacity: 0.4;
 }
 .icon {
-  height: 24px;
+  height: 48px;
 }
 </style>

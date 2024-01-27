@@ -1,18 +1,30 @@
 <template>
   <!--<app-header />-->
   <home-screen v-if="appState === 'idle'" :join-call="joinCall" />
-  <call-tile
-    v-else-if="appState === 'incall'"
-    :leave-call="leaveCall"
-    :name="name"
-    :room-url="roomUrl"
-  />
+  <div class="flex-center" v-else-if="appState === 'incall'">
+    <call-controls 
+      style="margin: 30px;"
+      :handle-video-click="handleVideoClick"
+      :handle-audio-click="handleAudioClick"
+      :handle-screenshare-click="handleScreenshareClick"
+      :participant="participant"
+      :leave-call="leaveCall"
+      :disable-screen-share="disableScreenShare"
+    />
+    <call-tile
+      :leave-call="leaveCall"
+      :name="name"
+      :room-url="roomUrl"
+    />
+  </div>
+
 </template>
 
 <script>
 import CallTile from "./CallTile.vue";
 import AppHeader from "./AppHeader.vue";
 import HomeScreen from "./HomeScreen.vue";
+import CallControls from "./CallControls.vue";
 
 export default {
   name: "App",
@@ -20,6 +32,7 @@ export default {
     CallTile,
     AppHeader,
     HomeScreen,
+    CallControls,
   },
   data() {
     return {

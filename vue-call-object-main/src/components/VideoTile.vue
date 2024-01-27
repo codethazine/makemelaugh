@@ -6,7 +6,7 @@
 
     <template v-if="participant.video">
       <video autoPlay muted playsInline :srcObject="videoSource"></video>
-      <p class="participant-name">{{ username }}</p>
+      <!-- <p class="participant-name">{{ username }}</p> -->
     </template>
 
     <template v-else>
@@ -14,14 +14,7 @@
     </template>
 
     <template v-if="participant.local">
-      <call-controls
-        :handle-video-click="handleVideoClick"
-        :handle-audio-click="handleAudioClick"
-        :handle-screenshare-click="handleScreenshareClick"
-        :participant="participant"
-        :leave-call="leaveCall"
-        :disable-screen-share="disableScreenShare"
-      />
+      
     </template>
   </div>
 </template>

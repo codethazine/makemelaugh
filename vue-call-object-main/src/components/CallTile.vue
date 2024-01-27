@@ -58,6 +58,7 @@ import ScreenshareTile from "./ScreenshareTile.vue";
 import LoadingTile from "./LoadingTile.vue";
 import PermissionsErrorMsg from "./PermissionsErrorMsg.vue";
 
+
 export default {
   name: "CallTile",
   components: {
