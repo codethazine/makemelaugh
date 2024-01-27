@@ -34,14 +34,17 @@
 
 .logo-home {
   width: 80%;
+  max-width: 40vh;
   display: inline-block;
   object-fit: contain
 }
 
 .text {
   font-family: 'VT323', monospace;
-  color: #fff;
-  font-size: 30px
+  color: white;
+  font-size: 30px;
+  /* Add shadow to text */
+  text-shadow: 2px 2px 0 #000;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
