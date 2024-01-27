@@ -4,6 +4,7 @@ Open three terminals and:
 1. Run the webapp
 ```
 cd webapp
+npm install
 npm run serve
 ```
 2. Run the node server
