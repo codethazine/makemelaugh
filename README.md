@@ -4,8 +4,8 @@ Video-chat based game with 1vs1 logics, where players try to make laugh the othe
 Every laugh (automatically tracked through AI) makes the user loose health points.
 
 ### Local setup
-Open three terminals and:
-1. Run the webapp
+Open two terminals and:
+1. Run the webapp. Make sure to install Vue.
 ```
 cd webapp
 npm install
