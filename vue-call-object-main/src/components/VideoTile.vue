@@ -122,7 +122,7 @@ export default {
 .tile {
   /*max-width: 50%;*/
   flex: 1 1 350px;
-  margin: 10px 20px;
+  margin: 10px 0px;
   position: relative;
 }
 video {

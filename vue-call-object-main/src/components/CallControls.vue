@@ -99,9 +99,9 @@ button:not(.leave) {
   height: 52px;
 }
 button.leave {
-  background-color: white;
+  background-color: transparent;
   opacity: 0.85;
-  padding: 14px 16px 15px;
+  padding: 0;
   border-radius: 0;
 }
 button:disabled {
@@ -109,6 +109,7 @@ button:disabled {
   opacity: 0.4;
 }
 .icon {
-  height: 48px;
+  width: 148px;
+  height: 72px;
 }
 </style>

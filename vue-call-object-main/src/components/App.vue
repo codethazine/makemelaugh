@@ -3,7 +3,7 @@
   <home-screen v-if="appState === 'idle'" :join-call="joinCall" />
   <div class="flex-center" v-else-if="appState === 'incall'">
     <call-controls 
-      style="margin: 30px;"
+      style="position: absolute; z-index: 100; top: 50%; left: 50%; transform: translate(-50%, -50%);"
       :handle-video-click="handleVideoClick"
       :handle-audio-click="handleAudioClick"
       :handle-screenshare-click="handleScreenshareClick"

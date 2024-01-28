@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main style="height: 100vh;">
     <!-- loading is true when the call is in the "joining-meeting" meeting state -->
     <template v-if="loading">
       <div class="loading-spinner"><loading-tile /></div>
@@ -39,11 +39,13 @@
                       :disable-screen-share="screen && !screen?.local"
                       :health="p.health"
                     />
-                    <div v-if="serverData && serverData[participants.indexOf(p)]" style="">
-                      <p>Happiness score: {{ serverData[participants.indexOf(p)] }}</p>
-                    </div>
-                    <div v-if="serverData && serverData[participants.indexOf(p)]" style="">
-                      <p style="margin-top: 0;">Health: {{ participants[participants.indexOf(p)].health }}</p>
+                    <div style="display: none;">
+                      <div v-if="serverData && serverData[participants.indexOf(p)]" style="">
+                        <p>Happiness score: {{ serverData[participants.indexOf(p)] }}</p>
+                      </div>
+                      <div v-if="serverData && serverData[participants.indexOf(p)]" style="">
+                        <p style="margin-top: 0;">Health: {{ participants[participants.indexOf(p)].health }}</p>
+                      </div>
                     </div>
                   </div>
                 </template>
@@ -287,6 +289,7 @@ main {
   align-items: center;
 }
 .participants-container {
+  height: 100vh;
   display: flex;
   margin: 0 -20px;
   justify-content: center;
@@ -303,7 +306,7 @@ p {
   color: #e71115;
 }
 .full-height {
-  height: 100%;
+  height: 100vh;
 }
 .error-button {
   color: #fff;
