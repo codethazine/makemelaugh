@@ -57,8 +57,8 @@ export default {
 
 .home {
   height: 100vh;
-  /*background-image: url('../assets/home-bg.png');*/
-  background-size: contain;
+  background-image: url('../assets/bg-home-new.jpg');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
   background-color: #9437B7;
