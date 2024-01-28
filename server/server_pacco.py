@@ -9,7 +9,7 @@ client = CallClient()
 
 async def send_random_data(websocket, path):
     while True:
-        data = {"id1": round(random.random(), 3), "id2": round(random.random(), 3)}
+        data = {0: round(random.random(), 3), 1: round(random.random(), 3)}
         await websocket.send(json.dumps(data))
         await asyncio.sleep(1)  # Send data every second
 

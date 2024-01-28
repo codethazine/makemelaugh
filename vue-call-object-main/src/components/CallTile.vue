@@ -26,20 +26,23 @@
             </template>
 
             <div v-if="participants" class="participants-container">
-              <template v-for="p in participants" :key="p.session_id">
-                <video-tile
-                  :participant="p"
-                  :handle-video-click="handleVideoClick"
-                  :handle-audio-click="handleAudioClick"
-                  :handle-screenshare-click="handleScreenshareClick"
-                  :leave-call="leaveAndCleanUp"
-                  :disable-screen-share="screen && !screen?.local"
-                />
-                <div v-if="serverData">
-                  <p>id1: {{ serverData.id1 }}</p>
-                  <p>id2: {{ serverData.id2 }}</p>
-                </div>
-              </template>
+              
+                <template v-for="p in participants" :key="p.session_id">
+                  <div style="display: flex;flex-direction: column; width: 50%;">
+                    <video-tile
+                    v-if="p.video"
+                      :participant="p"
+                      :handle-video-click="handleVideoClick"
+                      :handle-audio-click="handleAudioClick"
+                      :handle-screenshare-click="handleScreenshareClick"
+                      :leave-call="leaveAndCleanUp"
+                      :disable-screen-share="screen && !screen?.local"
+                    />
+                    <div v-if="serverData && serverData[participants.indexOf(p)]" style="">
+                      <p>Happiness score: {{ serverData[participants.indexOf(p)] }}</p>
+                    </div>
+                  </div>
+                </template>
 
               <template v-if="count === 1">
                 <waiting-card :url="roomUrl" />
