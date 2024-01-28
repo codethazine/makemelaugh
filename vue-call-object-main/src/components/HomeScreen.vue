@@ -81,7 +81,7 @@ export default {
 .text {
   font-family: 'VT323', monospace;
   color: white;
-  font-size: 30px;
+  font-size: 200%;
   /* Add shadow to text */
   text-shadow: 2px 2px 0 #000;
 }
