@@ -72,7 +72,7 @@ export default {
 
 .health-bar {
     position: relative;
-    width: 300px;
+    width: 100%;
     height: 30px;
     border: 1px solid #000;
     overflow: hidden;
