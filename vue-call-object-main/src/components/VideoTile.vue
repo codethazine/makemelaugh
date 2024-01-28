@@ -16,7 +16,7 @@
     <template v-if="participant.local">
       
     </template>
-    <HealthBarVue/>
+    <HealthBarVue :health="health"></HealthBarVue>
   </div>
 </template>
 
@@ -39,6 +39,7 @@ export default {
     "handleScreenshareClick",
     "leaveCall",
     "disableScreenShare",
+    "health"
   ],
   data() {
     return {

@@ -37,9 +37,13 @@
                       :handle-screenshare-click="handleScreenshareClick"
                       :leave-call="leaveAndCleanUp"
                       :disable-screen-share="screen && !screen?.local"
+                      :health="p.health"
                     />
                     <div v-if="serverData && serverData[participants.indexOf(p)]" style="">
                       <p>Happiness score: {{ serverData[participants.indexOf(p)] }}</p>
+                    </div>
+                    <div v-if="serverData && serverData[participants.indexOf(p)]" style="">
+                      <p style="margin-top: 0;">Health: {{ participants[participants.indexOf(p)].health }}</p>
                     </div>
                   </div>
                 </template>
@@ -95,6 +99,23 @@ export default {
     this.websocket = new WebSocket("ws://localhost:6789");
     this.websocket.onmessage = (event) => {
       this.serverData = JSON.parse(event.data);
+      // Add health to this.participants
+      this.participants.forEach((p) => {
+        p.health = p.health - this.serverData[this.participants.indexOf(p)];
+        // round to 3 decimal places
+        p.health = Math.round((p.health + Number.EPSILON) * 1000) / 1000;
+        if (p.health < 0) {
+          p.health = 0;
+        }
+      });
+      // If anyone has 0 health, stop updating health
+      this.participants.forEach((p) => {
+        if (p.health === 0) {
+          this.websocket.close();
+        }
+      });
+
+      console.log("[PARTICIPANTS] ", this.participants);
     };
 
     const option = {
@@ -148,12 +169,19 @@ export default {
      * to register only video/audio/screen track changes.
      */
     updateParticpants(e) {
-      console.log("[EVENT] ", e);
+      // console.log("[EVENT] ", e);
       if (!this.callObject) return;
 
       const p = this.callObject.participants();
       this.count = Object.values(p).length;
       this.participants = Object.values(p);
+
+      // Add health to this.participants
+      this.participants.forEach((p) => {
+        p.health = 100;
+      });
+
+      console.log("[PARTICIPANTS] ", this.participants);
 
       const screen = this.participants.filter((p) => p.screenVideoTrack);
       if (screen?.length && !this.screen) {

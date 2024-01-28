@@ -10,6 +10,12 @@ export default {
             trailColor: '#ff0000',
         }
     },
+    props: {
+        health: {
+            type: Number,
+            default: 100,
+        },
+    },
     computed: {
         healthPercentage() {
             return (this.currentHealth / this.maxHealth) * 100;
@@ -49,7 +55,7 @@ export default {
 <template>
     <div class="health-bar-container" @click="loseLife(10)" @keyup.enter="loseLife(20)">
         <div class="health-bar">
-            <div class="health-remaining" :style="{ width: healthPercentage + '%' }"></div>
+            <div class="health-remaining" :style="{ width: health + '%' }"></div>
         </div>
         <!--
         <button @click="loseLife(10)">Lose 10 Life</button>
