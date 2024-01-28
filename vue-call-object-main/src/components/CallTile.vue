@@ -266,6 +266,10 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap");
 main {
   font-family: "Ropa Sans", sans-serif;
+  background-image: url('../assets/bg-home-new.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
   background-color: #9437B7;
   height: 100%;
   position: relative;
@@ -296,7 +300,6 @@ main {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  background-color: #9437B7;
   height: inherit;
 }
 p {

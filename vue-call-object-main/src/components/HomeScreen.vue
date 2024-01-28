@@ -57,7 +57,7 @@ export default {
 
 .home {
   height: 100vh;
-  background-image: url('../assets/bg-home-new.jpg');
+  background-image: url('../assets/bg-home-new.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
