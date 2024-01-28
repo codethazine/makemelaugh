@@ -28,9 +28,8 @@
             <div v-if="participants" class="participants-container">
               
                 <template v-for="p in participants" :key="p.session_id">
-                  <div style="display: flex;flex-direction: column; width: 50%;">
+                  <div v-if="p.video" style="display: flex;flex-direction: column; width: 50%;">
                     <video-tile
-                    v-if="p.video"
                       :participant="p"
                       :handle-video-click="handleVideoClick"
                       :handle-audio-click="handleAudioClick"
