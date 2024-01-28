@@ -35,6 +35,10 @@
                   :leave-call="leaveAndCleanUp"
                   :disable-screen-share="screen && !screen?.local"
                 />
+                <div v-if="serverData">
+                  <p>id1: {{ serverData.id1 }}</p>
+                  <p>id2: {{ serverData.id2 }}</p>
+                </div>
               </template>
 
               <template v-if="count === 1">
@@ -80,9 +84,16 @@ export default {
       loading: false,
       showPermissionsError: false,
       screen: null,
+      websocket: null,
+      serverData: null,
     };
   },
   mounted() {
+    this.websocket = new WebSocket("ws://localhost:6789");
+    this.websocket.onmessage = (event) => {
+      this.serverData = JSON.parse(event.data);
+    };
+
     const option = {
       url: this.roomUrl,
     };
@@ -109,6 +120,11 @@ export default {
       .on("app-message", this.updateMessages);
   },
   unmounted() {
+    // Close WebSocket connection
+    if (this.websocket) {
+      this.websocket.close();
+    }
+
     if (!this.callObject) return;
     // Clean-up event handlers
     this.callObject

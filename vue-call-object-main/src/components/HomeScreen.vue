@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       name: "X",
-      url: "https://makemelaugh.daily.co/3AiL9WfT50wrRPEwZOJW",
+      url: "https://makemelaugh.daily.co/O8EvAKGhOPHpYuqfBHog",
     };
   },
   methods: {
