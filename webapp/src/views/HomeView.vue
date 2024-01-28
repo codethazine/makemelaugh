@@ -1,8 +1,11 @@
 <template>
   <div class="home">
     <div class="brand-container">
-      <img class="logo-home" alt="logo" src="../assets/logo.png">
+      <img class="logo-home" alt="logo" src="../assets/cat.png">
       <h2 class="text">Try not to laugh</h2>
+    </div>
+    <div>
+      <img src="../assets/cat.png">
     </div>
     <div class="text-container">
     </div>

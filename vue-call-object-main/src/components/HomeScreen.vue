@@ -4,6 +4,7 @@
       <img class="logo-home" alt="logo" src="../assets/logo.png">
       <h2 class="text">Try not to laugh</h2>
     </div>
+    <img style="height: 35%; object-fit: contain;" src="../assets/cat.png">
     <div class="text-container">
     </div>
     <div class="cta-container">
@@ -56,7 +57,7 @@ export default {
 
 .home {
   height: 100vh;
-  background-image: url('../assets/home-bg.png');
+  /*background-image: url('../assets/home-bg.png');*/
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
