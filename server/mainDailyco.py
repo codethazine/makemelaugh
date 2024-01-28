@@ -162,7 +162,7 @@ timeSeconds = 0
 # start_server = websockets.serve(send_happiness_score, "localhost", 6789)
 async def send_happiness_scores(websocket, path):
     while True:
-        data = {0: happiness_score_participant1*10, 1: happiness_score_participant2*10}
+        data = {0: happiness_score_participant1*20, 1: happiness_score_participant2*20}
         await websocket.send(json.dumps(data))
         await asyncio.sleep(1)  # Send data every second
 
