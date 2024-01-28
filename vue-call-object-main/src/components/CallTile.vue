@@ -100,6 +100,7 @@ export default {
   mounted() {
     this.websocket = new WebSocket("ws://localhost:6789");
     this.websocket.onmessage = (event) => {
+      console.log("[WEBSOCKET] ", event.data);
       this.serverData = JSON.parse(event.data);
       // Add health to this.participants
       this.participants.forEach((p) => {
@@ -117,7 +118,7 @@ export default {
         }
       });
 
-      console.log("[PARTICIPANTS] ", this.participants);
+      // console.log("[PARTICIPANTS] ", this.participants);
     };
 
     const option = {

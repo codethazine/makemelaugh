@@ -136,7 +136,7 @@ def on_video_frame(participant_id, video_frame):
             frame_height = video_frame.height
             frame_colorFormat = video_frame.color_format
             frame = np.frombuffer(npframebuffer, dtype=np.uint8).reshape(frame_height, frame_width, 4) # RGBA
-            print(frame)
+            # print(frame)
             # frame = cv2.imdecode(frame, cv2.IMREAD_ANYCOLOR)
             # convert the frame from RGBA to BGR
             frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
@@ -162,9 +162,9 @@ timeSeconds = 0
 # start_server = websockets.serve(send_happiness_score, "localhost", 6789)
 async def send_happiness_scores(websocket, path):
     while True:
-        data = {0: happiness_score_participant1, 1: happiness_score_participant2}
+        data = {0: happiness_score_participant1*10, 1: happiness_score_participant2*10}
         await websocket.send(json.dumps(data))
-    await asyncio.sleep(1)  # Send data every second
+        await asyncio.sleep(1)  # Send data every second
 
 
 start_server = websockets.serve(send_happiness_scores, "localhost", 6789)
