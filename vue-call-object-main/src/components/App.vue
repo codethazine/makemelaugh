@@ -42,6 +42,7 @@ export default {
     audio.play().catch(() => {
       // Handle any errors trying to start playback
     });
+    audio.volume = 0.5;
   },
   data() {
     return {
