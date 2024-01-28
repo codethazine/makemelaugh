@@ -18,6 +18,7 @@
         :room-url="roomUrl"
       />
     </div>
+    <audio id="background-audio" src="main-loop.mp3" loop autoplay></audio>
   </div>
 </template>
 
