@@ -37,6 +37,7 @@
                       :leave-call="leaveAndCleanUp"
                       :disable-screen-share="screen && !screen?.local"
                       :health="p.health"
+                      @click="decreaseHealth(p.session_id)"
                     />
                     <div style="display: none;">
                       <div v-if="serverData && serverData[participants.indexOf(p)]" style="">
@@ -164,6 +165,12 @@ export default {
       .off("app-message", this.updateMessages);
   },
   methods: {
+    decreaseHealth(sessionId) {
+      const participant = this.participants.find(p => p.session_id === sessionId);
+      if (participant) {
+        participant.health = Math.max(participant.health - 10, 0);
+      }
+    },
     /**
      * This is called any time a participant update registers.
      * In large calls, this should be optimized to avoid re-renders.
