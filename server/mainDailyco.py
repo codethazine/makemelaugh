@@ -160,18 +160,21 @@ client.set_video_renderer(PARTICIPANT_ID2, on_video_frame)
 timeSeconds = 0
 
 # start_server = websockets.serve(send_happiness_score, "localhost", 6789)
-# async def send_happiness_score(websocket, path):
-#     while True:
-#         data = {0: round(random.uniform(min_value, max_value), 3), 1: round(random.uniform(min_value, max_value), 3)}
-#         await websocket.send(json.dumps(data))
-#     await asyncio.sleep(1)  # Send data every second
+async def send_happiness_scores(websocket, path):
+    while True:
+        data = {0: happiness_score_participant1, 1: happiness_score_participant2}
+        await websocket.send(json.dumps(data))
+    await asyncio.sleep(1)  # Send data every second
 
 
-# asyncio.get_event_loop().run_until_complete(start_server)
-# asyncio.get_event_loop().run_forever()
+start_server = websockets.serve(send_happiness_scores, "localhost", 6789)
 
-while True:
-    sleep(1)
+
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
+
+# while True:
+#     sleep(1)
 
     # after 10 seconds, leave the call and rejoin it
     # timeSeconds += 1
