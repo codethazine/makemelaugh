@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "npm run test && vite build",
     "serve": "vite preview",
-    "lint": "echo 'No linting configured'",
+    "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore --fix src",
     "format": "prettier . --write",
     "test": "npm run lint"
   },

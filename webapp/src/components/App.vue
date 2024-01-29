@@ -1,5 +1,5 @@
 <template>
-  <!--<app-header />-->
+    <!--<app-header />-->
   <div>
     <home-screen v-if="appState === 'idle'" :join-call="joinCall" />
     <div v-else-if="appState === 'incall'" class="flex-center">
