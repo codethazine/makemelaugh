@@ -83,8 +83,8 @@ dict_keys = participants.keys()
 dict_keys = list(dict_keys)
 dict_keys.remove("local")
 
-if(len(dict_keys) > 4):
-    print("ERROR: There should be 2 participants in the call")
+if(len(dict_keys) > 4 or len(dict_keys) < 2):
+    print("ERROR: There should be 2 (or more?) participants in the call")
     exit(1)
 # get the first participant id
 PARTICIPANT_ID1 = dict_keys[0]
@@ -113,17 +113,12 @@ def on_video_frame(participant_id, video_frame):
             frame_height = video_frame.height
             frame_colorFormat = video_frame.color_format
             frame = np.frombuffer(npframebuffer, dtype=np.uint8).reshape(frame_height, frame_width, 4) # RGBA
-            # print(frame)
-            # print(frame_colorFormat)
-            # frame = cv2.imdecode(frame, cv2.IMREAD_ANYCOLOR)
             # convert the frame from RGBA to BGR
             frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
 
             # show the frame in a window for 1 second
-            # cv2.imshow('frame', frame)
-            # cv2.waitKey(1000)
-            # cv2.destroyAllWindows()
-
+            
+            
 
             # # calculate happiness score for participant 1
             global happiness_score_participant1
@@ -141,15 +136,10 @@ def on_video_frame(participant_id, video_frame):
             frame_height = video_frame.height
             frame_colorFormat = video_frame.color_format
             frame = np.frombuffer(npframebuffer, dtype=np.uint8).reshape(frame_height, frame_width, 4) # RGBA
-            # print(frame)
-            # frame = cv2.imdecode(frame, cv2.IMREAD_ANYCOLOR)
+
             # convert the frame from RGBA to BGR
             frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
 
-            # show the frame in a window
-            # cv2.imshow('frame', frame)
-            # cv2.waitKey(1000)
-            # cv2.destroyAllWindows()
 
             # # calculate happiness score
             global happiness_score_participant2
