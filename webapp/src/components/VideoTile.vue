@@ -21,14 +21,14 @@
 </template>
 
 <script>
-import CallControls from "./CallControls.vue";
+// import CallControls from "./CallControls.vue";
 import NoVideoTile from "./NoVideoTile.vue";
 import HealthBarVue from './HealthBar.vue';
 
 export default {
   name: "VideoTile",
   components: {
-    CallControls,
+    // CallControls,
     NoVideoTile,
     HealthBarVue
   },

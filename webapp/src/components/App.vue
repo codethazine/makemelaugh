@@ -24,7 +24,7 @@
 
 <script>
 import CallTile from "./CallTile.vue";
-import AppHeader from "./AppHeader.vue";
+// import AppHeader from "./AppHeader.vue";
 import HomeScreen from "./HomeScreen.vue";
 import CallControls from "./CallControls.vue";
 
@@ -32,7 +32,7 @@ export default {
   name: "App",
   components: {
     CallTile,
-    AppHeader,
+    // AppHeader,
     HomeScreen,
     CallControls,
   },

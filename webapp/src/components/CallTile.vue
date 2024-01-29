@@ -65,7 +65,7 @@
 import daily from "@daily-co/daily-js";
 
 import WaitingCard from "./WaitingCard.vue";
-import ChatTile from "./ChatTile.vue";
+// import ChatTile from "./ChatTile.vue";
 import VideoTile from "./VideoTile.vue";
 import ScreenshareTile from "./ScreenshareTile.vue";
 import LoadingTile from "./LoadingTile.vue";
@@ -77,7 +77,7 @@ export default {
   components: {
     VideoTile,
     WaitingCard,
-    ChatTile,
+    // ChatTile,
     ScreenshareTile,
     LoadingTile,
     PermissionsErrorMsg,
@@ -178,7 +178,7 @@ export default {
      * to register only video/audio/screen track changes.
      */
     updateParticpants(e) {
-      // console.log("[EVENT] ", e);
+      console.log("[EVENT] ", e);
       if (!this.callObject) return;
 
       const p = this.callObject.participants();
