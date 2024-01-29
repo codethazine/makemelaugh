@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       name: "X",
-      url: "https://makemelaugh.daily.co/O8EvAKGhOPHpYuqfBHog",
+      url: "https://makemelaugh.daily.co/" + process.env.VUE_APP_ROOM_ID || 'O8EvAKGhOPHpYuqfBHog';
     };
   },
   methods: {

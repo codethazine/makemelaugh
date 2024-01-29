@@ -8,6 +8,13 @@ from fer import FER
 from daily import daily
 from time import sleep
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # This loads the environment variables from .env file
+# Accessing the ROOM_ID
+room_id = os.getenv('ROOM_ID', 'O8EvAKGhOPHpYuqfBHog')  # 'default_value' is a fallback if ROOM_ID is not set
+
 # min_health and max_health value
 min_value = 0.1
 max_value = 10
@@ -61,13 +68,11 @@ iterations_participant2 = 0
 # initialize the dailyco client
 daily.Daily.init()
 
-dailyco_meeting_token = "3AiL9WfT50wrRPEwZOJW"
-
 # create the client
 client = daily.CallClient()
 
 # join the dailyco meeting 
-client.join("https://makemelaugh.daily.co/O8EvAKGhOPHpYuqfBHog")
+client.join(f"https://makemelaugh.daily.co/{room_id}")
 print("Joined meeting")
 
 
@@ -182,7 +187,7 @@ asyncio.get_event_loop().run_forever()
     #     print("Leaving call")
     #     client.leave()
     #     print("Rejoining call")
-    #     client.join("https://makemelaugh.daily.co/O8EvAKGhOPHpYuqfBHog")
+    #     client.join("https://makemelaugh.daily.co/yEVFUN1yEOnMyIetrMfO")
     #     print("reJoined meeting")
     #     # set the video renderer for the new participants
     #     client.set_video_renderer(PARTICIPANT_ID1, on_video_frame)
