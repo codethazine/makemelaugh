@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-makemelaugh-dev-190140-authRole",
+      "UnauthRoleArn": "arn:aws:iam::908339666016:role/amplify-makemelaugh-dev-190140-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::908339666016:role/amplify-makemelaugh-dev-190140-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-makemelaugh-dev-190140-deployment",
+      "UnauthRoleName": "amplify-makemelaugh-dev-190140-unauthRole",
+      "StackName": "amplify-makemelaugh-dev-190140",
+      "StackId": "arn:aws:cloudformation:us-east-1:908339666016:stack/amplify-makemelaugh-dev-190140/75fca270-bed0-11ee-86ed-0e794ebd7951",
+      "AmplifyAppId": "d1sx7pijre1i9h"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1sx7pijre1i9h",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}

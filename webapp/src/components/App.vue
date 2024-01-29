@@ -2,7 +2,7 @@
   <!--<app-header />-->
   <div>
     <home-screen v-if="appState === 'idle'" :join-call="joinCall" />
-    <div class="flex-center" v-else-if="appState === 'incall'">
+    <div v-else-if="appState === 'incall'" class="flex-center">
       <call-controls 
         style="position: absolute; z-index: 100; top: 50%; left: 50%; transform: translate(-50%, -50%);"
         :handle-video-click="handleVideoClick"
@@ -36,6 +36,13 @@ export default {
     HomeScreen,
     CallControls,
   },
+  data() {
+    return {
+      appState: "idle",
+      name: "Guest",
+      roomUrl: null,
+    };
+  },
   mounted() {
     // Ensures audio plays on load in browsers that require user interaction
     const audio = document.getElementById("background-audio");
@@ -43,13 +50,6 @@ export default {
       // Handle any errors trying to start playback
     });
     audio.volume = 0.5;
-  },
-  data() {
-    return {
-      appState: "idle",
-      name: "Guest",
-      roomUrl: null,
-    };
   },
   methods: {
     /**

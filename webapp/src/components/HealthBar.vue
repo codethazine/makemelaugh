@@ -1,5 +1,11 @@
 <script>
 export default {
+    props: {
+        health: {
+            type: Number,
+            default: 100,
+        },
+    },
     data() {
         return {
             maxHealth: 100,
@@ -10,16 +16,21 @@ export default {
             trailColor: '#ff0000',
         }
     },
-    props: {
-        health: {
-            type: Number,
-            default: 100,
-        },
-    },
     computed: {
         healthPercentage() {
             return (this.currentHealth / this.maxHealth) * 100;
         },
+    },
+    watch: {
+        showTrail(newValue) {
+            if (newValue) {
+                this.trailWidth = Math.min((100 - this.healthPercentage) * 2, 100);
+            }
+        },
+
+    },
+    mounted() {
+        document.addEventListener('keydown', this.handleKeyDown);
     },
     methods: {
         loseLife(amount) {
@@ -37,17 +48,6 @@ export default {
         handleLeftArrowKey() {
             this.loseLife(20);
         },
-    },
-    watch: {
-        showTrail(newValue) {
-            if (newValue) {
-                this.trailWidth = Math.min((100 - this.healthPercentage) * 2, 100);
-            }
-        },
-
-    },
-    mounted() {
-        document.addEventListener('keydown', this.handleKeyDown);
     }
 }
 </script>
