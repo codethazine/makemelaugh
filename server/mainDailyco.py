@@ -116,10 +116,6 @@ def on_video_frame(participant_id, video_frame):
             # convert the frame from RGBA to BGR
             frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
 
-            # show the frame in a window for 1 second
-            
-            
-
             # # calculate happiness score for participant 1
             global happiness_score_participant1
             happiness_score_participant1 = calculate_happiness_score_fer(frame)
@@ -167,22 +163,6 @@ start_server = websockets.serve(send_happiness_scores, "localhost", 6789)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
-
-# while True:
-#     sleep(1)
-
-    # after 10 seconds, leave the call and rejoin it
-    # timeSeconds += 1
-    # if timeSeconds == 10:
-    #     print("Leaving call")
-    #     client.leave()
-    #     print("Rejoining call")
-    #     client.join("https://makemelaugh.daily.co/yEVFUN1yEOnMyIetrMfO")
-    #     print("reJoined meeting")
-    #     # set the video renderer for the new participants
-    #     client.set_video_renderer(PARTICIPANT_ID1, on_video_frame)
-    #     client.set_video_renderer(PARTICIPANT_ID2, on_video_frame)
-    #     timeSeconds = 0
 
 
 # close the client
