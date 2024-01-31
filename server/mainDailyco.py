@@ -12,19 +12,16 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()  # This loads the environment variables from .env file
-# Accessing the ROOM_ID
+# Accessing the environment variables
 room_id = os.getenv('ROOM_ID', 'O8EvAKGhOPHpYuqfBHog')  # 'default_value' is a fallback if ROOM_ID is not set
-
-# min_health and max_health value
-min_value = 0.1
-max_value = 10
+# webapp_url = os.getenv('WEBAPP_URL', '127.0.0.1')  # 'default_value' is localhost if WEBAPP_URL is not set
 
 # Emotion detector from fer
 emotion_detector = FER(mtcnn=True)
  
 
 
-def calculate_happiness_score_fer(frame):
+def calculate_happiness_score_fer_faces(frame):
     # Calculate happiness score for frame using neural network
     # use cv2 to detect face, using haar cascade
 
@@ -60,6 +57,18 @@ def calculate_happiness_score_fer(frame):
 
     return max_happiness_score
 
+
+def calculate_happiness_score_fer(frame):
+    # Calculate happiness score for frame using neural network
+    result = emotion_detector.detect_emotions(frame)
+    if(len(result) == 0):
+        return 0.0
+    print("RESULT:")
+    print(result)
+    emotions = result[0]["emotions"]
+    max_happiness_score = emotions["happy"]
+
+    return max_happiness_score
 
 # global variables
 iterations_participant1 = 0
@@ -100,9 +109,7 @@ global happiness_score_participant2
 
 # async calls
 # called after every frame is received
-def on_video_frame(participant_id, video_frame):
-    #print(f"NEW FRAME FROM {participant_id}")
-    # print(f"NEW FRAME FROM {participant_id}")
+def on_video_frame(participant_id, video_frame):    
     if participant_id == PARTICIPANT_ID1:
         global iterations_participant1
         if iterations_participant1 % 30 == 0:
@@ -155,7 +162,7 @@ async def send_happiness_scores(websocket, path):
     while True:
         data = {0: happiness_score_participant1*20, 1: happiness_score_participant2*20}
         await websocket.send(json.dumps(data))
-        await asyncio.sleep(1)  # Send data every second
+        await asyncio.sleep(0.5) # send every 0.5 seconds
 
 
 start_server = websockets.serve(send_happiness_scores, "localhost", 6789)
