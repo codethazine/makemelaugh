@@ -8,10 +8,12 @@ Daily.init()
 client = CallClient()
 min_value = 0.1
 max_value = 10
+room_id = "249k9f9jjjf3f3f3f"
 
 async def send_random_data(websocket, path):
     while True:
-        data = {0: round(random.uniform(min_value, max_value), 3), 1: round(random.uniform(min_value, max_value), 3)}
+        data = {0: round(random.uniform(min_value, max_value), 3), 1: round(random.uniform(min_value, max_value), 3),
+                "room_id": room_id}
         await websocket.send(json.dumps(data))
         await asyncio.sleep(1)  # Send data every second
 
